@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from .local_settings import *
 
+
+# os for jalase 1  >>> direction of files in models
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c9ib+(r^=$y##sqikbl9ly@st5=of^t!mk5@ds)ju+xrd%_2a9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+##DEBUG = True
+##IS_DEVEL =True
+##ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'products',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

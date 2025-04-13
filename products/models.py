@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _  # ostad :ugettext_lazy
+from django.utils.translation import gettext_lazy as _  # ostad :ugettext_lazy # jalse 1 # translasions
 
 class Category (models.Model):
     parent = models.ForeignKey('self',verbose_name=_('parent'),blank=True,null=True,on_delete=models.CASCADE)
@@ -15,7 +15,8 @@ class Category (models.Model):
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
 
-
+    def __str__(self):
+        return self.title
 
 
 
@@ -31,14 +32,26 @@ class Product (models.Model):
     class Meta:
         db_table = 'products'
         verbose_name = _('Product')
-        verbose_name_plural = _('Prducts')
+        verbose_name_plural = _('Products')
 
+    def __str__(self):
+        return self.title
 
 
 
 class File (models.Model):
-    product = models.ForeignKey('Product', verbose_name=_('product'), blank=True, null=True, on_delete=models.CASCADE)
+    FILE_AUDIO= 1
+    FILE_VIDEO= 2
+    FILE_PDF= 3
+    FILE_TYPES=(
+        (FILE_AUDIO,_('audio')),
+        (FILE_VIDEO,_('video')),
+        (FILE_PDF,_('pdf'))
+
+    )
+    product = models.ForeignKey('Product', verbose_name=_('product'),related_name='files', blank=True, null=True, on_delete=models.CASCADE)
     title = models.CharField(_('title'), max_length=50)
+    file_type = models.PositiveSmallIntegerField(_('file_type'),choices=FILE_TYPES)
     file = models.FileField(_('file'), upload_to='files/%y/%m/%d/')
     is_enable = models.BooleanField(_('is_enable'), default=True)
     created_time = models.DateTimeField(_('created_time'), auto_now_add=True)
@@ -49,3 +62,5 @@ class File (models.Model):
         verbose_name = _('file')
         verbose_name_plural = _('files')
 
+    def __str__(self):
+        return self.title

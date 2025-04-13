@@ -5,3 +5,5 @@ media/
 *.pyc
 
 db.sqlite3
+# database is secret
+local_settings.py
