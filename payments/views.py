@@ -66,7 +66,8 @@ class PaymentView(APIView):
             expire_time = timezones.now() + timezones.timedelta(days=payment.package.duration.days)
 
         )
-        return Response()
+        return Response({'detail':'Payment is successful'})
+
 
 
 
